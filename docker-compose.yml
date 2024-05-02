@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  gobot:
+    image: gobot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      JWT_SECRET: "tr+50_Eq2r:XD=R25qOuia3hx^iX)0ka"
+      DB_URL: "postgres://user:password@database/gobot?sslmode=disable"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gobot
